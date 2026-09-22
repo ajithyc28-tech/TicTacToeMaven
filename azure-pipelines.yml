@@ -1,0 +1,16 @@
+trigger:
+- master1
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: Maven@4
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'clean test package'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    displayName: 'Build and Test Maven Project'
